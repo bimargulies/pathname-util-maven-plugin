@@ -9,6 +9,9 @@
         <path1>rightHere</path1>
         <path2>../upOne</path2>
     </properties>
+    <modules>
+    	<module>child</module>
+    </modules>
     <build>
         <plugins>
             <plugin>
@@ -18,6 +21,7 @@
                 <executions>
                     <execution>
                         <id>test</id>
+                        <inherited>false</inherited>
                         <goals>
                             <goal>absolutize</goal>
                         </goals>
