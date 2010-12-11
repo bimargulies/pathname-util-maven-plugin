@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.basistech</groupId>
+    <artifactId>pathname-util-maven-plugin-top</artifactId>
+    <packaging>pom</packaging>
+    <name>Pathname Utility Maven Plugin Toplevel</name>
+    <version>1-SNAPSHOT</version>
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>5</version>
+    </parent>
+    <description>A maven plugin with goals useful for connecting maven builds to pathnames. So
+  far, the only goal takes a relative pathname and absolutizes it, so that aggregate
+  children get the right pathname.</description>
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <scm>
+        <url>scm:git:git@github.com:bimargulies/pathname-util-maven-plugin.git</url>
+    </scm>
+    <developers>
+        <developer>
+            <id>bimargulies</id>
+            <name>Benson Margulies</name>
+            <email>bimargulies@gmail.com</email>
+        </developer>
+    </developers>
+    <build>
+        <defaultGoal>install</defaultGoal>
+    </build>
+    <modules>
+        <module>plugin</module>
+        <module>integrationTests</module>
+    </modules>
+</project>

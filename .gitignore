@@ -1,0 +1,13 @@
+/target
+.classpath
+.project
+.settings/
+integrationTests/.classpath
+integrationTests/.project
+integrationTests/.settings/
+integrationTests/target
+plugin/target
+plugin/.classpath
+plugin/.project
+plugin/.settings/
+
