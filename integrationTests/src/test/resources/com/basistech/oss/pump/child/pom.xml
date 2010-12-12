@@ -27,7 +27,7 @@
 						<configuration>
 							<resources>
 								<resource>
-									<directory>${path1.abs}</directory>
+									<directory>${globalBase}/rightHere</directory>
 								</resource>
 							</resources>
 						</configuration>

@@ -10,4 +10,5 @@ plugin/target
 plugin/.classpath
 plugin/.project
 plugin/.settings/
+integrationTests/src/test/resources/com/basistech/oss/pump/child/target
 

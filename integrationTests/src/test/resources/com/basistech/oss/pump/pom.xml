@@ -5,10 +5,6 @@
     <artifactId>pump-test</artifactId>
     <packaging>pom</packaging>
     <version>1-SNAPSHOT</version>
-    <properties>
-        <path1>rightHere</path1>
-        <path2>../upOne</path2>
-    </properties>
     <modules>
     	<module>child</module>
     </modules>
@@ -21,15 +17,14 @@
                 <executions>
                     <execution>
                         <id>test</id>
-                        <inherited>false</inherited>
+                        <inherited>true</inherited>
                         <goals>
-                            <goal>absolutize</goal>
+                            <goal>findParentBase</goal>
                         </goals>
                         <configuration>
-                            <propertyNames>
-                                <propertyName>path1</propertyName>
-                                <propertyName>path2</propertyName>
-                            </propertyNames>
+                        	<groupId>com.basistech.oss.pump</groupId>
+                        	<artifactId>pump-test</artifactId>
+                        	<propertyName>globalBase</propertyName>
                         </configuration>
                     </execution>
                 </executions>

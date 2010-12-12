@@ -29,29 +29,34 @@ import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.project.MavenProject;
 
 /**
- * @description Absolutize pathname in a property
- * @goal absolutize
+ * @description set a property to the base dir of some parent. Useful for finding resources relative to a parent.
+ * @goal findParentBase
  * @phase validate
- * @inheritByDefault false
+ * @inheritByDefault true
  * @requiresProject true
  */
 public class PumpAbsolutizeMojo extends AbstractMojo {
-	
-	 /**
-     * Properties to process.
-     * @required
-     * @parameter 
-     * @description A collection of property names. For each such property, this goal
-     * will create a new property with the name ending '.abs' that contains the absolute
-     * form of the pathname.
-     */
-    private String[] propertyNames;
+
+	/**
+	 * @parameter
+	 * @required
+	 * @description the group id of the parent for which you want a base directory.
+	 */
+	private String groupId;
+	/**
+	 * @parameter
+	 * @required
+	 * @description the artifactId of the parent for which you want a base directory.
+	 */
+
+	private String artifactId;
     
     /**
      * @parameter
-     * @description The base directory for the pathnames. The default is project.basedir.
+     * @required
+     * @description The property to set to the baseDirectory.
      */
-    private File baseDirectory;
+    private String propertyName;
     
     /**
      * @parameter expression="${project}"
@@ -61,22 +66,15 @@ public class PumpAbsolutizeMojo extends AbstractMojo {
 
 	/** {@inheritDoc}*/
 	public void execute() throws MojoExecutionException, MojoFailureException {
-		if (baseDirectory == null) {
-			baseDirectory = project.getBasedir();
-		}
-		getLog().debug("Base directory: " + baseDirectory.getAbsolutePath());
-		for (String prop : propertyNames) {
-			String path = (String)project.getProperties().get(prop);
-			File afile = new File(baseDirectory, path);
-			String newPropName = prop + ".abs";
-			String absPath;
-			try {
-				absPath = afile.getCanonicalPath();
-			} catch (IOException e) {
-				throw new MojoExecutionException("Failed to get canonical pathname for " + afile.getAbsolutePath(), e);
+		for (MavenProject proj = project; proj != null; proj = proj.getParent()) {
+			if(groupId.equals(proj.getGroupId())
+					&& artifactId.equals(proj.getArtifactId())) {
+				String absBase = proj.getBasedir().getAbsolutePath();
+				project.getProperties().put(propertyName, absBase);
+				getLog().info("Setting " + propertyName + " to " + absBase);
+				return;
 			}
-			project.getProperties().put(newPropName, absPath);
-			getLog().debug("Setting " + newPropName + ": " + absPath);
 		}
+		throw new MojoExecutionException("No parent had specified group:artifact");
 	}
 }

@@ -22,16 +22,19 @@ package com.basistech.oss.pump;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.jar.JarFile;
+import java.util.zip.ZipEntry;
 
 import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
  * 
  */
-public class PumpAbsolutizeMojoTest {
+public class PumpAbsolutizeMojoTest extends Assert {
 	private static final String TEST_GROUP_ID = "com.basistech.oss.pump";
 
 	@Test
@@ -50,17 +53,6 @@ public class PumpAbsolutizeMojoTest {
 		verifier = new Verifier(testDir.getAbsolutePath());
 		verifier.deleteArtifact(TEST_GROUP_ID, "pump-test", "1-SNAPSHOT", "pom");
 
-		/*
-		 * The Command Line Options (CLI) are passed to the verifier as a list.
-		 * This is handy for things like redefining the local repository if
-		 * needed. In this case, we use the -N flag so that Maven won't recurse.
-		 * We are only installing the parent pom to the local repo here.
-		 */
-		List<String> cliOptions = new ArrayList<String>();
-		cliOptions.add("-N");
-		cliOptions.add("-X");
-		// use the debug messages to check for what we want.
-		verifier.setMavenDebug(true);
 		verifier.executeGoal("install");
 
 		/*
@@ -71,14 +63,12 @@ public class PumpAbsolutizeMojoTest {
 		 * http://maven.apache.org/shared/maven-verifier/apidocs/index.html
 		 */
 		verifier.verifyErrorFreeLog();
-		String toFind = "Setting path1.abs: ";
-		File f1 = new File(testDir, "rightHere");
-		toFind = toFind + f1.getCanonicalPath();
-		verifier.verifyTextInLog(toFind);
-		File f2 = new File(testDir.getParentFile(), "upOne");
-		toFind = "Setting path2.abs: ";
-		toFind = toFind + f2.getCanonicalPath();
-		verifier.verifyTextInLog(toFind);
+		///Users/benson/.m2/repository/com/basistech/oss/pump/pump-test-child/1-SNAPSHOT/pump-test-child-1-SNAPSHOT.pom
+		String path = verifier.getArtifactPath("com.basistech.oss.pump", "pump-test-child", "1-SNAPSHOT", "jar");
+		JarFile jf = new JarFile(path);
+		ZipEntry e = jf.getEntry("hiThere.txt");
+		assertNotNull(e);
+		
 		/*
 		 * Reset the streams before executing the verifier again.
 		 */
