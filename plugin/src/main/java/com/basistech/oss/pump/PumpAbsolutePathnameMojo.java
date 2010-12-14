@@ -21,6 +21,7 @@
 package com.basistech.oss.pump;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -28,7 +29,7 @@ import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.project.MavenProject;
 
 /**
- * @description Set properties to the absolute pathnames of other properties. If the input property name is x,
+ * @description Set properties to the canonical pathnames of other properties. If the input property name is x,
  *              the output is x.abs.
  * @goal absolutize
  * @phase validate
@@ -61,13 +62,19 @@ public class PumpAbsolutePathnameMojo extends AbstractMojo {
     public void execute() throws MojoExecutionException, MojoFailureException {
         for (String prop : propertyNames) {
             String path = (String)project.getProperties().get(prop);
+            String canon = null;
             if (path == null) {
                 getLog().error("No value for property " + prop);
             } else {
                 File f = new File(path);
-                project.getProperties().put(prop + ".abs", f.getAbsolutePath());
+                try {
+                    canon = f.getCanonicalPath();
+                } catch (IOException e) {
+                    throw new MojoExecutionException("Failed to canonicalize " + f.getPath(), e);
+                }
+                project.getProperties().put(prop + ".abs", canon);
                 if (verbose) {
-                    getLog().info("Setting " + prop + ".abs to " + f.getAbsolutePath());
+                    getLog().info("Setting " + prop + ".abs to " + canon);
                 }
             }
         }

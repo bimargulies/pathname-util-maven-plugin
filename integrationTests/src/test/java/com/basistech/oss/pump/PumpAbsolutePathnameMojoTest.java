@@ -30,7 +30,7 @@ import org.apache.maven.it.util.ResourceExtractor;
 /**
  * 
  */
-public class PompAbsolutePathnameMojoTest extends Assert {
+public class PumpAbsolutePathnameMojoTest extends Assert {
 	private static final String TEST_GROUP_ID = "com.basistech.oss.pump";
 
 	@Test
