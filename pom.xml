@@ -6,7 +6,7 @@
 	<artifactId>pathname-util-maven-plugin-top</artifactId>
 	<packaging>pom</packaging>
 	<name>Pathname Utility Maven Plugin Toplevel</name>
-	<version>1-SNAPSHOT</version>
+	<version>1.0-SNAPSHOT</version>
 	<parent>
 		<groupId>org.sonatype.oss</groupId>
 		<artifactId>oss-parent</artifactId>
