@@ -48,8 +48,7 @@
 					<version>2.1</version>
 					<configuration>
 						<useReleaseProfile>true</useReleaseProfile>
-						<releaseProfiles>release</releaseProfiles>
-						<remoteTagging>true</remoteTagging>
+						<releaseProfiles>release,github_release</releaseProfiles>
 						<preparationGoals>clean install</preparationGoals>
 						<goals>deploy</goals>
 						<autoVersionSubmodules>true</autoVersionSubmodules>
@@ -66,6 +65,10 @@
 	   <profile>
 	       <id>release</id>
 	       <!--  empty so far -->
+	   </profile>
+	   <profile>
+	       <id>github_release</id>
+	       <!-- settings.xml to pick up passphrase and key. -->
 	   </profile>
 	</profiles>
 </project>
