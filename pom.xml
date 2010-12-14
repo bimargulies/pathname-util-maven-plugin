@@ -35,28 +35,26 @@
 	</developers>
 	<build>
 		<defaultGoal>install</defaultGoal>
+		<pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>2.1</version>
+                    <configuration>
+                        <useReleaseProfile>true</useReleaseProfile>
+                        <releaseProfiles>release</releaseProfiles>
+                        <remoteTagging>true</remoteTagging>
+                        <preparationGoals>clean install</preparationGoals>
+                        <goals>deploy</goals>
+                        <autoVersionSubmodules>true</autoVersionSubmodules>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
 	</build>
 	<modules>
 		<module>plugin</module>
 		<module>integrationTests</module>
 	</modules>
-	<build>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-release-plugin</artifactId>
-					<version>2.1</version>
-					<configuration>
-						<useReleaseProfile>true</useReleaseProfile>
-						<releaseProfiles>release</releaseProfiles>
-						<remoteTagging>true</remoteTagging>
-						<preparationGoals>clean install</preparationGoals>
-						<goals>deploy</goals>
-						<autoVersionSubmodules>true</autoVersionSubmodules>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
-	</build>
 </project>
