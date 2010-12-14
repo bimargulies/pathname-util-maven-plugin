@@ -5,11 +5,11 @@
     <artifactId>pathname-util-maven-plugin-it</artifactId>
     <packaging>jar</packaging>
     <name>Pathname Utility Maven Plugin Integration Tests</name>
-    <version>1.0</version>
+    <version>1.1-SNAPSHOT</version>
     <parent>
         <groupId>com.basistech</groupId>
         <artifactId>pathname-util-maven-plugin-top</artifactId>
-        <version>1.0</version>
+        <version>1.1-SNAPSHOT</version>
     </parent>
     <build>
         <defaultGoal>install</defaultGoal>
