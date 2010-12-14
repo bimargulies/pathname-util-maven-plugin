@@ -20,21 +20,17 @@
 package com.basistech.oss.pump;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.jar.JarFile;
-import java.util.zip.ZipEntry;
-
-import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
 
 import org.junit.Assert;
 import org.junit.Test;
 
+import org.apache.maven.it.Verifier;
+import org.apache.maven.it.util.ResourceExtractor;
+
 /**
  * 
  */
-public class PumpAbsolutizeMojoTest extends Assert {
+public class PompAbsolutePathnameMojoTest extends Assert {
 	private static final String TEST_GROUP_ID = "com.basistech.oss.pump";
 
 	@Test
@@ -63,11 +59,7 @@ public class PumpAbsolutizeMojoTest extends Assert {
 		 * http://maven.apache.org/shared/maven-verifier/apidocs/index.html
 		 */
 		verifier.verifyErrorFreeLog();
-		///Users/benson/.m2/repository/com/basistech/oss/pump/pump-test-child/1-SNAPSHOT/pump-test-child-1-SNAPSHOT.pom
-		String path = verifier.getArtifactPath("com.basistech.oss.pump", "pump-test-child", "1-SNAPSHOT", "jar");
-		JarFile jf = new JarFile(path);
-		ZipEntry e = jf.getEntry("hiThere.txt");
-		assertNotNull(e);
+		verifier.verifyTextInLog("Setting rel1.abs to ");
 		
 		/*
 		 * Reset the streams before executing the verifier again.

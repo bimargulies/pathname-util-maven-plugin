@@ -20,9 +20,6 @@
 
 package com.basistech.oss.pump;
 
-import java.io.File;
-import java.io.IOException;
-
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
@@ -35,7 +32,7 @@ import org.apache.maven.project.MavenProject;
  * @inheritByDefault true
  * @requiresProject true
  */
-public class PumpAbsolutizeMojo extends AbstractMojo {
+public class PumpFindParentBasedirMojo extends AbstractMojo {
 
 	/**
 	 * @parameter

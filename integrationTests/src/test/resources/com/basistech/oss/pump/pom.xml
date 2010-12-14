@@ -8,6 +8,9 @@
     <modules>
     	<module>child</module>
     </modules>
+    <properties>
+        <rel1>../feathers</rel1>
+    </properties>
     <build>
         <plugins>
             <plugin>
@@ -25,6 +28,19 @@
                         	<groupId>com.basistech.oss.pump</groupId>
                         	<artifactId>pump-test</artifactId>
                         	<propertyName>globalBase</propertyName>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>test-abs</id>
+                        <inherited>true</inherited>
+                        <goals>
+                            <goal>absolutize</goal>
+                        </goals>
+                        <configuration>
+                            <verbose>true</verbose>
+                            <propertyNames>
+                                <propertyName>rel1</propertyName>
+                            </propertyNames>
                         </configuration>
                     </execution>
                 </executions>
